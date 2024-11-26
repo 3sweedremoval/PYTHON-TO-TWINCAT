@@ -4,7 +4,7 @@ import pyads
 import csv
 
 # Functie om X- en Y-coördinaten afzonderlijk naar TwinCAT te verzenden
-def send_coordinates_to_twincat(x_coords, y_coords, plc_address="39.231.85.117.1.1", port=851):
+def send_coordinates_to_twincat(x_coords, y_coords, plc_address="5.143.138.190.1.1", port=851):
     try:
         # Verbind met TwinCAT via ADS
         plc = pyads.Connection(plc_address, port)
@@ -16,10 +16,10 @@ def send_coordinates_to_twincat(x_coords, y_coords, plc_address="39.231.85.117.1
             return
 
         # Schrijf de X-coördinaten naar TwinCAT
-        plc.write_by_name("MAIN.x_coordinate_array", x_coords, pyads.PLCTYPE_INT * len(x_coords))
+        plc.write_by_name("MAIN.xCordinates", x_coords, pyads.PLCTYPE_INT * len(x_coords))
 
         # Schrijf de Y-coördinaten naar TwinCAT
-        plc.write_by_name("MAIN.y_coordinate_array", y_coords, pyads.PLCTYPE_INT * len(y_coords))
+        plc.write_by_name("MAIN.yCordinates", y_coords, pyads.PLCTYPE_INT * len(y_coords))
 
         print("X- en Y-coördinaten succesvol verzonden!")
 
