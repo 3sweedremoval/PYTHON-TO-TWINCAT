@@ -24,8 +24,8 @@ def send_coordinates_to_twincat(x_coords, y_coords, plc_address="5.143.138.190.1
         plc.close()
 
 # Functie om live video te verwerken (elke seconde)
-def process_video(interval=1):
-    cap = cv2.VideoCapture(0)  # Gebruik de camera (0 voor standaardcamera)
+def process_video(interval=3):
+    cap = cv2.VideoCapture(1)  # Gebruik de camera (0 voor standaardcamera)
 
     if not cap.isOpened():
         print("Kan camera niet openen.")
@@ -88,7 +88,7 @@ def process_video(interval=1):
                 save_coordinates_to_csv(list(zip(x_coords, y_coords)), "live_coordinates.csv")
 
                 # Opslaan van het huidige frame (optioneel)
-                cv2.imwrite(f"frame_{int(current_time)}.jpg", resized_frame)
+                #cv2.imwrite(f"frame_{int(current_time)}.jpg", resized_frame)
 
                 print(f"Frame vastgelegd en verwerkt op {time.ctime(current_time)}.")
 
@@ -116,4 +116,4 @@ def save_coordinates_to_csv(coordinates, filename="coordinates.csv"):
         print(f"Fout bij opslaan in CSV: {e}")
 
 # Start live videoverwerking (elke seconde een capture)
-process_video(interval=1)
+process_video(interval=3)
